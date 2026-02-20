@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐥 혜오니의 메모 정리함</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+        }
+        .category {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .category h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .memo-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #3498db;
+            border-radius: 5px;
+        }
+        .date {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+        .search-box {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #3498db;
+            border-radius: 25px;
+            font-size: 16px;
+            margin-bottom: 30px;
+            box-sizing: border-box;
+        }
+        .work { border-left-color: #e74c3c; }
+        .idea { border-left-color: #f39c12; }
+        .personal { border-left-color: #2ecc71; }
+        .learning { border-left-color: #9b59b6; }
+        .security { border-left-color: #e67e22; }
+        .setup { border-left-color: #1abc9c; }
+        
+        .tech-term {
+            background: #f8f9fa;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 4px solid #9b59b6;
+        }
+        .tech-term summary {
+            padding: 12px 15px;
+            cursor: pointer;
+            font-weight: bold;
+            list-style: none;
+            background: linear-gradient(90deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 8px 8px 0 0;
+            transition: background-color 0.2s;
+        }
+        .tech-term summary:hover {
+            background: linear-gradient(90deg, #e9ecef 0%, #dee2e6 100%);
+        }
+        .tech-term summary::-webkit-details-marker {
+            display: none;
+        }
+        .tech-term summary::before {
+            content: "▶ ";
+            color: #9b59b6;
+            font-size: 12px;
+            margin-right: 8px;
+        }
+        .tech-term[open] summary::before {
+            content: "▼ ";
+        }
+        .tech-term[open] summary {
+            border-radius: 8px 8px 0 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .tech-content {
+            padding: 15px;
+            background: white;
+            border-radius: 0 0 8px 8px;
+        }
+        
+        /* 관계도 호버 효과 */
+        .diagram-element {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            user-select: none; /* 텍스트 선택 방지 */
+            -webkit-user-select: none;
+            -webkit-touch-callout: none; /* iOS 길게 누르기 메뉴 방지 */
+        }
+        .diagram-element:hover {
+            transform: scale(1.05);
+            filter: brightness(1.15);
+        }
+        .diagram-element:active {
+            transform: scale(1.02);
+        }
+        
+        /* 툴팁 스타일 */
+        .tooltip {
+            position: absolute;
+            background: rgba(44, 62, 80, 0.95);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.4;
+            max-width: 280px;
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .tooltip.show {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border: 5px solid transparent;
+            border-top-color: rgba(44, 62, 80, 0.95);
+        }
+        
+        /* 모바일 터치 개선 */
+        svg {
+            touch-action: manipulation;
+        }
+        .diagram-element * {
+            pointer-events: none; /* 자식 요소들은 이벤트 받지 않음 */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🐥 혜오니의 메모 정리함</h1>
+        <p>스티커 메모들이 체계적으로 정리되는 곳</p>
+        <small>마지막 업데이트: 2026-02-20 21:06</small>
+    </div>
+
+    <input type="text" id="searchBox" class="search-box" placeholder="🔍 메모 검색...">
+
+    <div class="category">
+        <h2>💼 업무 관련</h2>
+        <div class="memo-item work">
+            <div class="date">2026-02-20</div>
+            <div>여기에 업무 관련 메모들이 정리될 예정</div>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>💡 아이디어</h2>
+        <div class="memo-item idea">
+            <div class="date">2026-02-20</div>
+            <div>창의적인 아이디어와 영감들</div>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>👤 개인적인 것들</h2>
+        <div class="memo-item personal">
+            <div class="date">2026-02-20</div>
+            <div>일상, 감정, 개인적인 메모들</div>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>⚙️ 설치 & 세팅</h2>
+        <div class="memo-item setup">
+            <div class="date">2026-02-20</div>
+            <div><strong>🍺 OpenClaw 설치 과정 (macOS)</strong><br>
+            <strong>1️⃣ 기본 준비물 설치:</strong><br>
+            • <code>Homebrew 5.0.14</code> → 맥 패키지 매니저<br>
+            • <code>Node.js v25.6.0</code> → JavaScript 실행 환경<br>
+            • <code>npm 11.8.0</code> → Node 패키지 매니저<br><br>
+            
+            <strong>2️⃣ OpenClaw 설치:</strong><br>
+            • <code>npm install -g openclaw</code><br>
+            • 설치 위치: <code>/usr/local/bin/openclaw</code><br><br>
+            
+            <strong>3️⃣ 초기 설정:</strong><br>
+            • <code>openclaw wizard onboard</code> → 설정 마법사<br>
+            • Claude OAuth 로그인 연동<br>
+            • 텔레그램 봇 토큰 연결<br>
+            • 워크스페이스 경로 설정<br><br>
+            
+            <strong>📝 참고:</strong> 회사 멘토님의 도움으로 설치 완료!<br>
+            <em>다른 분들께 공유할 때 참고용</em></div>
+        </div>
+        <div class="memo-item setup">
+            <div class="date">2026-02-20</div>
+            <div><strong>🔧 현재 설치된 버전 정보</strong><br>
+            • <strong>OpenClaw:</strong> 2026.2.9<br>
+            • <strong>Node.js:</strong> v25.6.0<br>
+            • <strong>npm:</strong> 11.8.0<br>
+            • <strong>Homebrew:</strong> 5.0.14<br>
+            • <strong>OS:</strong> macOS (Darwin 25.2.0 arm64)</div>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>🔐 보안 & 토큰</h2>
+        <div class="memo-item security">
+            <div class="date">2026-02-20</div>
+            <div><strong>🔑 Claude OAuth 토큰</strong><br>
+            메모해둔 토큰: sk-ant-oat01-****(마스킹)<br>
+            → Claude Pro 구독을 OpenClaw와 연결해주는 인증키<br>
+            → OAuth 방식이라 API 비용 없이 Pro 할당량 사용<br>
+            ⚠️ <em>절대 남들에게 공유하면 안 됨!</em></div>
+        </div>
+        <div class="memo-item security">
+            <div class="date">2026-02-20</div>
+            <div><strong>🤖 텔레그램 봇 토큰</strong><br>
+            → OpenClaw와 텔레그램을 연결해주는 봇 API 키<br>
+            → 이걸로 혜오니봇이 텔레그램으로 메시지 송수신<br>
+            → @BotFather에서 발급받은 봇 인증키<br>
+            → 설정: dmPolicy="pairing", groupPolicy="allowlist"<br>
+            ⚠️ <em>이것도 보안상 중요한 키!</em></div>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>📚 학습 & 기술</h2>
+        <p style="margin-bottom: 20px; color: #6c757d; font-style: italic;">📖 궁금한 기술 용어들을 클릭해서 확인해보세요</p>
+        
+        <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            <h3 style="text-align: center; margin-bottom: 15px; color: #2c3e50;">🗺️ 기술 용어 관계도</h3>
+            <p style="text-align: center; margin-bottom: 15px; font-size: 12px; color: #7f8c8d;">
+                💻 데스크톱: 마우스 올리기/클릭 | 📱 모바일: 터치하기 (같은 곳 다시 터치하면 닫기)
+            </p>
+            <svg viewBox="0 0 800 520" style="width: 100%; height: auto; max-width: 800px;">
+                <!-- 배경 그라데이션 -->
+                <defs>
+                    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#f8f9fa"/>
+                        <stop offset="100%" style="stop-color:#e9ecef"/>
+                    </linearGradient>
+                    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                    </filter>
+                </defs>
+                
+                <!-- 사용자 -->
+                <g class="diagram-element" data-tooltip="🍎 사용자 (혜오니)<br>• 질문하고 답변 받는 사람<br>• OpenClaw를 통해 AI와 대화">
+                    <circle cx="100" cy="200" r="40" fill="#3498db" filter="url(#shadow)"/>
+                    <text x="100" y="180" text-anchor="middle" fill="white" font-weight="bold" font-size="12">👤</text>
+                    <text x="100" y="200" text-anchor="middle" fill="white" font-weight="bold" font-size="10">혜오니</text>
+                </g>
+                <text x="100" y="250" text-anchor="middle" fill="#2c3e50" font-size="11">사용자</text>
+                
+                <!-- 앱/OpenClaw -->
+                <g class="diagram-element" data-tooltip="🤖 OpenClaw (애플리케이션)<br>• JavaScript 언어로 만들어진 프로그램<br>• 사용자와 AI를 연결해주는 다리<br>• npm으로 설치됨">
+                    <rect x="250" y="160" width="80" height="80" rx="10" fill="#e67e22" filter="url(#shadow)"/>
+                    <text x="290" y="185" text-anchor="middle" fill="white" font-weight="bold" font-size="12">🤖</text>
+                    <text x="290" y="200" text-anchor="middle" fill="white" font-weight="bold" font-size="10">OpenClaw</text>
+                    <text x="290" y="215" text-anchor="middle" fill="white" font-size="9">(앱)</text>
+                </g>
+                <text x="290" y="255" text-anchor="middle" fill="#2c3e50" font-size="11">애플리케이션</text>
+                
+                <!-- API 게이트웨이 -->
+                <g class="diagram-element" data-tooltip="📡 API (웨이터)<br>• 앱과 서버 사이의 중간 전달자<br>• 요청을 받아서 서버로 전달<br>• 응답을 받아서 앱으로 다시 전달">
+                    <ellipse cx="500" cy="200" rx="60" ry="35" fill="#9b59b6" filter="url(#shadow)"/>
+                    <text x="500" y="185" text-anchor="middle" fill="white" font-weight="bold" font-size="12">📡</text>
+                    <text x="500" y="200" text-anchor="middle" fill="white" font-weight="bold" font-size="10">API</text>
+                    <text x="500" y="215" text-anchor="middle" fill="white" font-size="9">(웨이터)</text>
+                </g>
+                <text x="500" y="250" text-anchor="middle" fill="#2c3e50" font-size="11">중간 전달자</text>
+                
+                <!-- 서버/Claude -->
+                <g class="diagram-element" data-tooltip="🏢 Claude 서버<br>• Anthropic이 운영하는 AI 서비스<br>• 실제로 답변을 생성하는 곳<br>• 클라우드에서 돌아가는 거대한 AI">
+                    <rect x="650" y="160" width="80" height="80" rx="10" fill="#2ecc71" filter="url(#shadow)"/>
+                    <text x="690" y="185" text-anchor="middle" fill="white" font-weight="bold" font-size="12">🏢</text>
+                    <text x="690" y="200" text-anchor="middle" fill="white" font-weight="bold" font-size="10">Claude</text>
+                    <text x="690" y="215" text-anchor="middle" fill="white" font-size="9">(서버)</text>
+                </g>
+                <text x="690" y="255" text-anchor="middle" fill="#2c3e50" font-size="11">실제 서비스</text>
+                
+                <!-- 토큰 (열쇠) -->
+                <g class="diagram-element" data-tooltip="🔑 토큰 (호텔 키카드)<br>• '나 진짜 사용자 맞아!' 증명서<br>• OAuth: Claude Pro 구독 연동<br>• Bot: 텔레그램 연결용">
+                    <circle cx="375" cy="100" r="25" fill="#f39c12" filter="url(#shadow)"/>
+                    <text x="375" y="85" text-anchor="middle" fill="white" font-weight="bold" font-size="12">🔑</text>
+                    <text x="375" y="100" text-anchor="middle" fill="white" font-weight="bold" font-size="8">토큰</text>
+                    <text x="375" y="110" text-anchor="middle" fill="white" font-size="7">인증키</text>
+                </g>
+                <text x="375" y="140" text-anchor="middle" fill="#2c3e50" font-size="10">신원 증명</text>
+                
+                <!-- 화살표들 -->
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#34495e"/>
+                    </marker>
+                </defs>
+                
+                <!-- 사용자 → OpenClaw -->
+                <path d="M 140 200 L 250 200" stroke="#34495e" stroke-width="3" marker-end="url(#arrowhead)" fill="none"/>
+                <text x="195" y="190" text-anchor="middle" fill="#34495e" font-size="10">요청</text>
+                
+                <!-- OpenClaw → API -->
+                <path d="M 330 200 L 440 200" stroke="#34495e" stroke-width="3" marker-end="url(#arrowhead)" fill="none"/>
+                <text x="385" y="190" text-anchor="middle" fill="#34495e" font-size="10">API 호출</text>
+                
+                <!-- API → Claude -->
+                <path d="M 560 200 L 650 200" stroke="#34495e" stroke-width="3" marker-end="url(#arrowhead)" fill="none"/>
+                <text x="605" y="190" text-anchor="middle" fill="#34495e" font-size="10">전달</text>
+                
+                <!-- 토큰 연결선 (점선) -->
+                <path d="M 355 120 L 320 160" stroke="#f39c12" stroke-width="2" stroke-dasharray="5,5" fill="none"/>
+                <path d="M 395 120 L 480 160" stroke="#f39c12" stroke-width="2" stroke-dasharray="5,5" fill="none"/>
+                
+                <!-- 설치 기반층 구분선 -->
+                <line x1="50" y1="320" x2="750" y2="320" stroke="#dee2e6" stroke-width="2" stroke-dasharray="10,5"/>
+                <text x="400" y="310" text-anchor="middle" fill="#6c757d" font-size="10">설치 기반층</text>
+                
+                <!-- macOS (기반) -->
+                <rect x="50" y="350" width="100" height="60" rx="8" fill="#34495e" filter="url(#shadow)"/>
+                <text x="100" y="370" text-anchor="middle" fill="white" font-weight="bold" font-size="10">🍎 macOS</text>
+                <text x="100" y="385" text-anchor="middle" fill="white" font-size="8">운영체제</text>
+                <text x="100" y="425" text-anchor="middle" fill="#2c3e50" font-size="9">기반 시스템</text>
+                
+                <!-- Homebrew -->
+                <g class="diagram-element" data-tooltip="🍺 Homebrew (이마트)<br>• 맥용 프로그램 설치 도구<br>• 뭐든지 설치 가능 (Node.js, Chrome 등)<br>• brew install 명령어 사용">
+                    <rect x="200" y="350" width="80" height="60" rx="8" fill="#1abc9c" filter="url(#shadow)"/>
+                    <text x="240" y="370" text-anchor="middle" fill="white" font-weight="bold" font-size="10">🍺</text>
+                    <text x="240" y="385" text-anchor="middle" fill="white" font-weight="bold" font-size="9">Homebrew</text>
+                    <text x="240" y="395" text-anchor="middle" fill="white" font-size="7">(편의점)</text>
+                </g>
+                <text x="240" y="425" text-anchor="middle" fill="#2c3e50" font-size="9">일반 마트</text>
+                
+                <!-- Node.js -->
+                <g class="diagram-element" data-tooltip="🟢 Node.js (번역기)<br>• JavaScript(컴퓨터 언어)를 컴퓨터에서 실행 가능하게<br>• OpenClaw 같은 JS 프로그램의 실행 환경<br>• Homebrew로 설치됨">
+                    <ellipse cx="400" cy="380" rx="50" ry="30" fill="#68c947" filter="url(#shadow)"/>
+                    <text x="400" y="375" text-anchor="middle" fill="white" font-weight="bold" font-size="10">🟢</text>
+                    <text x="400" y="390" text-anchor="middle" fill="white" font-weight="bold" font-size="9">Node.js</text>
+                </g>
+                <text x="400" y="425" text-anchor="middle" fill="#2c3e50" font-size="9">번역기</text>
+                
+                <!-- npm -->
+                <g class="diagram-element" data-tooltip="📦 npm (하이마트)<br>• JavaScript 언어 전용 쇼핑몰<br>• OpenClaw 같은 JS로 만든 프로그램 설치<br>• npm install 명령어 사용">
+                    <rect x="520" y="350" width="80" height="60" rx="8" fill="#c53030" filter="url(#shadow)"/>
+                    <text x="560" y="370" text-anchor="middle" fill="white" font-weight="bold" font-size="10">📦</text>
+                    <text x="560" y="385" text-anchor="middle" fill="white" font-weight="bold" font-size="9">npm</text>
+                    <text x="560" y="395" text-anchor="middle" fill="white" font-size="7">(하이마트)</text>
+                </g>
+                <text x="560" y="425" text-anchor="middle" fill="#2c3e50" font-size="9">JS전문점</text>
+                
+                <!-- OpenClaw -->
+                <g class="diagram-element" data-tooltip="🤖 OpenClaw 설치완료!<br>• npm으로 설치된 최종 프로그램<br>• Node.js 위에서 실행<br>• 이제 AI와 대화 가능!">
+                    <rect x="670" y="350" width="80" height="60" rx="8" fill="#e67e22" filter="url(#shadow)"/>
+                    <text x="710" y="370" text-anchor="middle" fill="white" font-weight="bold" font-size="10">🤖</text>
+                    <text x="710" y="385" text-anchor="middle" fill="white" font-weight="bold" font-size="9">OpenClaw</text>
+                    <text x="710" y="395" text-anchor="middle" fill="white" font-size="7">(최종)</text>
+                </g>
+                <text x="710" y="425" text-anchor="middle" fill="#2c3e50" font-size="9">메인 프로그램</text>
+                
+                <!-- 설치 흐름 화살표 -->
+                <path d="M 150 380 L 200 380" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)" fill="none"/>
+                <path d="M 280 380 L 350 380" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)" fill="none"/>
+                <path d="M 450 380 L 520 380" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)" fill="none"/>
+                <path d="M 600 380 L 670 380" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)" fill="none"/>
+                
+                <!-- 설치 과정 설명 -->
+                <text x="175" y="335" text-anchor="middle" fill="#2c3e50" font-size="8">설치</text>
+                <text x="315" y="330" text-anchor="middle" fill="#2c3e50" font-size="8">일반마트에서</text>
+                <text x="315" y="345" text-anchor="middle" fill="#2c3e50" font-size="8">Node설치</text>
+                <text x="485" y="330" text-anchor="middle" fill="#2c3e50" font-size="8">JS전문점에서</text>
+                <text x="485" y="345" text-anchor="middle" fill="#2c3e50" font-size="8">OpenClaw설치</text>
+                <text x="635" y="340" text-anchor="middle" fill="#2c3e50" font-size="8">완성!</text>
+                
+                <!-- 연결선 (OpenClaw 설치된 것과 사용하는 것 연결) -->
+                <path d="M 710 350 L 290 240" stroke="#e67e22" stroke-width="2" stroke-dasharray="8,4" fill="none"/>
+                
+                <!-- 설명 텍스트 -->
+                <text x="400" y="470" text-anchor="middle" fill="#7f8c8d" font-size="11">
+                    🔑 토큰 = 출입 허가증 | 📡 API = 중간 전달자 | 🏢 서버 = 실제 일하는 곳
+                </text>
+                <text x="400" y="485" text-anchor="middle" fill="#7f8c8d" font-size="10">
+                    🍺 Homebrew = 이마트 (뭐든지) | 🟢 Node.js = 번역기 | 📦 npm = 하이마트 (JS전용)
+                </text>
+                <text x="400" y="500" text-anchor="middle" fill="#7f8c8d" font-size="9">
+                    ⚡ JavaScript = 컴퓨터 언어 (OpenClaw도 이 언어로 만들어짐)
+                </text>
+            </svg>
+        </div>
+        
+        <details class="tech-term">
+            <summary>🔑 토큰 (Token)</summary>
+            <div class="tech-content">
+                <div class="date">2026-02-20</div>
+                <strong>🍎 쉬운 비유:</strong> 호텔 키카드 같은 거!<br>
+                • 호텔에서 체크인하면 → 키카드 받음 → 내 방 열 수 있음<br>
+                • 웹서비스에서 로그인하면 → 토큰 받음 → 내 계정으로 작업 가능<br><br>
+                <strong>🔧 기술적으로:</strong><br>
+                • <strong>API 토큰</strong> = "나 진짜 사용자 맞아!" 증명서<br>
+                • <strong>OAuth 토큰</strong> = 다른 앱이 내 계정 대신 사용할 수 있게 해주는 허가증<br>
+                • <strong>Bot 토큰</strong> = 봇이 메신저에서 활동할 수 있게 해주는 신분증
+            </div>
+        </details>
+        
+        <details class="tech-term">
+            <summary>📡 API (Application Programming Interface)</summary>
+            <div class="tech-content">
+                <div class="date">2026-02-20</div>
+                <strong>🍎 쉬운 비유:</strong> 식당 웨이터!<br>
+                • 손님(앱) → 웨이터(API) → 주방(서버)<br>
+                • "햄버거 하나 주세요" → 웨이터가 전달 → 주방에서 만들어서 가져옴<br>
+                • 손님은 주방에 직접 들어갈 수 없고, 웨이터를 통해서만 주문 가능<br><br>
+                <strong>🔧 실제 예시:</strong><br>
+                • 날씨 앱 → 기상청 API → 날씨 정보 받아옴<br>
+                • 혜오니봇 → Claude API → AI 응답 받아옴
+            </div>
+        </details>
+
+        <details class="tech-term">
+            <summary>🍺 Homebrew</summary>
+            <div class="tech-content">
+                <div class="date">2026-02-20</div>
+                <strong>🍎 쉬운 비유:</strong> 맥북의 편의점!<br>
+                • 일반 편의점에서 "라면 주세요" → 직원이 가져다줌<br>
+                • Homebrew에서 "Node.js 주세요" → 알아서 다운로드해서 설치해줌<br>
+                • <code>brew install 프로그램명</code> → 자동으로 설치<br><br>
+                <strong>🔧 실제로는:</strong><br>
+                • 맥용 **패키지 매니저** (프로그램 설치 도구)<br>
+                • 복잡한 설치 과정을 **한 줄 명령어**로 간단하게<br>
+                • 업데이트, 삭제도 쉽게 관리
+            </div>
+        </details>
+
+        <details class="tech-term">
+            <summary>🟢 Node.js</summary>
+            <div class="tech-content">
+                <div class="date">2026-02-20</div>
+                <strong>🍎 초간단 비유:</strong> 한국어만 아는 외국인 친구를 위한 **번역기**!<br><br>
+                
+                <strong>📱 상황 설명:</strong><br>
+                • JavaScript = 외국인 친구 (똑똑하지만 **웹브라우저 안에서만** 일할 수 있음)<br>
+                • 맥북 = 한국 (웹브라우저 밖의 세상)<br>
+                • Node.js = **번역기** (외국인 친구가 한국에서도 일할 수 있게 도와줌)<br><br>
+                
+                <strong>🎯 결과:</strong><br>
+                • Node.js 없으면 → JavaScript는 웹페이지에서만 작동<br>
+                • Node.js 있으면 → JavaScript가 **맥북에서 OpenClaw** 같은 프로그램도 만들 수 있음<br><br>
+                
+                <strong>🔧 즉:</strong> OpenClaw가 JavaScript로 만들어져서 Node.js가 필요한 거야!
+            </div>
+        </details>
+
+        <details class="tech-term">
+            <summary>📦 npm</summary>
+            <div class="tech-content">
+                <div class="date">2026-02-20</div>
+                <strong>🍎 초간단 비유:</strong> **전자제품 전문점** (하이마트 같은 곳)!<br><br>
+                
+                <strong>🛍️ 상황 설명:</strong><br>
+                • 혜오니가 책상 만들고 싶어 → 나사, 목재, 손잡이 필요<br>
+                • 하나하나 다른 가게 돌아다니기 힘들어 → **전문점에서 한번에** 주문<br>
+                • 개발자가 JavaScript 프로그램 만들고 싶어 → 여러 기능 부품들 필요<br>
+                • 하나하나 찾기 힘들어 → **npm에서 한번에** 다운로드<br><br>
+                
+                <strong>🎯 실제 사용:</strong><br>
+                • <code>npm install openclaw</code> = "전문점에서 OpenClaw 주문하기"<br>
+                • 자동으로 필요한 모든 부품들까지 함께 배송됨<br><br>
+                
+                <strong>🔧 중요:</strong> **JavaScript/Node.js 전용** 쇼핑몰이야!
+            </div>
+        </details>
+
+        <details class="tech-term">
+            <summary>⚡ JavaScript (JS)</summary>
+            <div class="tech-content">
+                <div class="date">2026-02-20</div>
+                <strong>🍎 초간단 비유:</strong> **컴퓨터 언어** (영어, 한국어처럼)!<br><br>
+                
+                <strong>🗣️ 상황 설명:</strong><br>
+                • 사람들끼리 대화할 때 → 한국어, 영어 사용<br>
+                • 컴퓨터랑 대화할 때 → JavaScript, Python, Java 등 사용<br>
+                • JavaScript = 컴퓨터에게 **"이렇게 해줘"** 라고 지시하는 언어<br><br>
+                
+                <strong>🌐 원래 용도:</strong><br>
+                • 웹페이지를 **움직이게** 만드는 언어 (버튼 클릭, 애니메이션 등)<br>
+                • 지금은 **모든 종류 프로그램**도 만들 수 있음<br><br>
+                
+                <strong>🎯 JS 프로그램 예시:</strong><br>
+                • **OpenClaw** = JavaScript로 작성된 프로그램<br>
+                • **VS Code** (코드 편집기) = JavaScript로 만듦<br>
+                • **Discord** = JavaScript로 만듦<br><br>
+                
+                <strong>🔧 즉:</strong> JavaScript라는 언어로 작성된 컴퓨터 프로그램!
+            </div>
+        </details>
+
+        <details class="tech-term">
+            <summary>🔄 Homebrew vs npm 차이점</summary>
+            <div class="tech-content">
+                <div class="date">2026-02-20</div>
+                <strong>🍎 쉬운 비유:</strong> **일반 마트 vs 전문점** 차이!<br><br>
+                
+                <strong>🍺 Homebrew = 이마트/코스트코 (일반 대형마트)</strong><br>
+                • **모든 종류** 물건 판매: 음식, 옷, 전자제품, 생활용품<br>
+                • **맥용 프로그램** 뭐든지: Chrome, Zoom, Node.js, Python 등<br>
+                • <code>brew install 프로그램명</code><br><br>
+                
+                <strong>📦 npm = 하이마트 (전자제품 전문점)</strong><br>
+                • **JavaScript/Node.js 전용** 프로그램만 판매<br>
+                • OpenClaw, Express, React 같은 **JavaScript 생태계** 물건들<br>
+                • <code>npm install 패키지명</code><br><br>
+                
+                <strong>🎯 실제 사용 예:</strong><br>
+                • Node.js 설치 → <code>brew install node</code> (이마트에서 사기)<br>
+                • OpenClaw 설치 → <code>npm install openclaw</code> (하이마트에서 사기)<br><br>
+                
+                <strong>📝 정리:</strong> Homebrew로 기본 도구들 설치하고, npm으로 JavaScript 프로그램들 설치!
+            </div>
+        </details></thinking>
+
+        <div class="memo-item learning">
+            <div class="date">2026-02-20</div>
+            <div>기타 기술 관련 메모들</div>
+        </div>
+    </div>
+
+    <script>
+        // 실시간 검색 기능
+        document.getElementById('searchBox').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const memos = document.querySelectorAll('.memo-item');
+            
+            memos.forEach(memo => {
+                const text = memo.textContent.toLowerCase();
+                if (text.includes(searchTerm) || searchTerm === '') {
+                    memo.style.display = 'block';
+                } else {
+                    memo.style.display = 'none';
+                }
+            });
+        });
+
+        // 관계도 툴팁 기능 (데스크톱 + 모바일)
+        document.addEventListener('DOMContentLoaded', function() {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            document.body.appendChild(tooltip);
+            
+            const diagramElements = document.querySelectorAll('.diagram-element');
+            let currentActiveElement = null;
+            let isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            
+            console.log('Touch device detected:', isTouchDevice);
+            
+            function showTooltip(element, event) {
+                const tooltipText = element.getAttribute('data-tooltip');
+                console.log('Showing tooltip for:', tooltipText ? 'element found' : 'no tooltip');
+                
+                if (tooltipText) {
+                    tooltip.innerHTML = tooltipText;
+                    tooltip.classList.add('show');
+                    
+                    // 위치 계산
+                    const rect = element.getBoundingClientRect();
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+                    
+                    tooltip.style.left = rect.left + scrollLeft + rect.width / 2 - tooltip.offsetWidth / 2 + 'px';
+                    tooltip.style.top = rect.top + scrollTop - tooltip.offsetHeight - 10 + 'px';
+                    
+                    // 화면 경계 체크
+                    setTimeout(() => {
+                        const tooltipRect = tooltip.getBoundingClientRect();
+                        if (tooltipRect.left < 10) {
+                            tooltip.style.left = '10px';
+                        }
+                        if (tooltipRect.right > window.innerWidth - 10) {
+                            tooltip.style.left = window.innerWidth - tooltip.offsetWidth - 10 + 'px';
+                        }
+                    }, 10);
+                }
+            }
+            
+            function hideTooltip() {
+                tooltip.classList.remove('show');
+                currentActiveElement = null;
+            }
+            
+            diagramElements.forEach(element => {
+                console.log('Setting up element:', element);
+                
+                // 모바일과 데스크톱 모두 클릭/터치 이벤트 사용
+                element.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Click/Touch event triggered');
+                    
+                    if (currentActiveElement === this) {
+                        hideTooltip();
+                        console.log('Hiding tooltip');
+                    } else {
+                        hideTooltip();
+                        currentActiveElement = this;
+                        showTooltip(this, e);
+                        console.log('Showing new tooltip');
+                    }
+                });
+                
+                // 데스크톱에서는 호버도 지원
+                if (!isTouchDevice) {
+                    element.addEventListener('mouseenter', function(e) {
+                        if (!currentActiveElement) {
+                            showTooltip(this, e);
+                        }
+                    });
+                    
+                    element.addEventListener('mouseleave', function() {
+                        if (currentActiveElement !== this) {
+                            hideTooltip();
+                        }
+                    });
+                }
+            });
+            
+            // 다른 곳 클릭하면 툴팁 숨기기
+            document.addEventListener('click', function(e) {
+                let isClickOnDiagram = false;
+                diagramElements.forEach(element => {
+                    if (element.contains(e.target)) {
+                        isClickOnDiagram = true;
+                    }
+                });
+                
+                if (!isClickOnDiagram && currentActiveElement) {
+                    hideTooltip();
+                    console.log('Hiding tooltip - clicked outside');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
