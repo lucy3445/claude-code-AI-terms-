@@ -68,6 +68,7 @@
         .tag-comm   { background: #dbeafe; color: #1e40af; }
         .tag-sec    { background: #fef9c3; color: #854d0e; }
         .tag-lang   { background: #ffedd5; color: #9a3412; }
+        .tag-ai     { background: #fefce8; color: #854d0e; border: 1px solid #eab308; }
         .term-summary { color: #6c757d; font-size: 13px; margin: 4px 0 10px; font-style: italic; }
         .term-section { font-weight: bold; color: #4a5568; margin-top: 10px; margin-bottom: 4px; font-size: 13px; }
         .cat-section { margin: 24px 0 8px; }
@@ -77,6 +78,7 @@
         .cat-header-comm    { background: #dbeafe; color: #1e40af; }
         .cat-header-sec     { background: #fef9c3; color: #854d0e; }
         .cat-header-cmd     { background: #e8eaf0; color: #4a5568; }
+        .cat-header-ai      { background: #fefce8; color: #854d0e; border: 1px solid #eab308; }
         .cat-desc { font-size: 12px; color: #8898b0; margin: 2px 0 10px 4px; }
         
         .tech-term {
@@ -164,7 +166,7 @@
             <p style="text-align: center; margin-bottom: 20px; font-size: 13px; color: #7f8c8d;">
                 전체 흐름과 설치 순서를 한눈에 보는 참고용 다이어그램
             </p>
-            <svg viewBox="0 0 800 720" style="width: 100%; height: auto; max-width: 800px;">
+            <svg viewBox="0 0 800 570" style="width: 100%; height: auto; max-width: 800px;">
                 <defs>
                     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
                         <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.18"/>
@@ -172,161 +174,149 @@
                     <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
                         <polygon points="0 0, 10 3.5, 0 7" fill="#aab"/>
                     </marker>
+                    <marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#854d0e"/>
+                    </marker>
                 </defs>
 
                 <!-- ══ 사용 흐름 섹션 ══ -->
-                <rect x="14" y="14" width="772" height="380" rx="14" fill="#f7f9fc" stroke="#dde3ee" stroke-width="1.5"/>
+                <rect x="14" y="14" width="772" height="320" rx="14" fill="#f7f9fc" stroke="#dde3ee" stroke-width="1.5"/>
                 <text x="26" y="36" fill="#8898b0" font-size="13" font-weight="bold" letter-spacing="1">사용 흐름</text>
 
-                <!-- CLI -->
-                <g class="diagram-element" data-tooltip="🖥️ CLI (명령줄 인터페이스)<br>• 마우스 없이 글자로만 명령하는 방식<br>• 맥에서는 터미널 앱이 CLI<br>• 혜오니가 OpenClaw에 명령할 때 사용">
-                    <rect x="28" y="56" width="100" height="70" rx="12" fill="#6c7a92" filter="url(#shadow)"/>
-                    <text x="78" y="82" text-anchor="middle" fill="white" font-size="20">🖥️</text>
-                    <text x="78" y="104" text-anchor="middle" fill="white" font-weight="bold" font-size="13">CLI</text>
+                <!-- 맥 터미널 (CLI) -->
+                <g class="diagram-element" data-tooltip="🖥️ 맥 터미널 (CLI)<br>• 마우스 없이 글자로만 명령하는 방식<br>• VS Code와 별도로 여는 앱<br>• 설치·설정 명령어 입력할 때 사용">
+                    <rect x="28" y="130" width="110" height="70" rx="12" fill="#1e40af" filter="url(#shadow)"/>
+                    <text x="83" y="156" text-anchor="middle" fill="white" font-size="18">🖥️</text>
+                    <text x="83" y="176" text-anchor="middle" fill="white" font-weight="bold" font-size="12">맥 터미널</text>
                 </g>
-                <text x="78" y="144" text-anchor="middle" fill="#4a5568" font-size="13">명령 도구</text>
+                <text x="83" y="218" text-anchor="middle" fill="#4a5568" font-size="13">명령 도구</text>
 
-                <!-- 화살표: CLI → 혜오니 -->
-                <path d="M 128 91 L 152 110" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+                <!-- 화살표: 터미널 → 혜오니 -->
+                <path d="M 138 165 L 168 165" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
 
                 <!-- 혜오니 -->
-                <g class="diagram-element" data-tooltip="👤 사용자 (혜오니)<br>• 질문하고 답변 받는 사람<br>• CLI로 OpenClaw에 명령<br>• OpenClaw를 통해 AI와 대화">
-                    <circle cx="200" cy="155" r="50" fill="#4a90d9" filter="url(#shadow)"/>
-                    <text x="200" y="142" text-anchor="middle" fill="white" font-size="22">👤</text>
-                    <text x="200" y="166" text-anchor="middle" fill="white" font-weight="bold" font-size="14">혜오니</text>
+                <g class="diagram-element" data-tooltip="👤 사용자 (혜오니)<br>• 질문하고 답변 받는 사람<br>• VS Code와 터미널로 Claude와 대화<br>• Claude Code extension 사용">
+                    <circle cx="218" cy="165" r="46" fill="#475569" filter="url(#shadow)"/>
+                    <text x="218" y="153" text-anchor="middle" fill="white" font-size="20">👤</text>
+                    <text x="218" y="174" text-anchor="middle" fill="white" font-weight="bold" font-size="13">혜오니</text>
                 </g>
-                <text x="200" y="222" text-anchor="middle" fill="#4a5568" font-size="13">사용자</text>
+                <text x="218" y="228" text-anchor="middle" fill="#4a5568" font-size="13">사용자</text>
 
-                <!-- 화살표: 혜오니 → OpenClaw -->
-                <path d="M 251 155 L 313 155" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
-                <text x="282" y="143" text-anchor="middle" fill="#8898b0" font-size="12">요청</text>
+                <!-- 화살표: 혜오니 → VS Code -->
+                <path d="M 264 165 L 294 165" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+                <text x="279" y="153" text-anchor="middle" fill="#8898b0" font-size="11">작업</text>
 
-                <!-- OpenClaw -->
-                <g class="diagram-element" data-tooltip="🤖 OpenClaw<br>• JavaScript로 만들어진 프로그램<br>• 사용자와 AI를 연결하는 다리<br>• npm으로 설치">
-                    <rect x="313" y="113" width="114" height="84" rx="13" fill="#e8834a" filter="url(#shadow)"/>
-                    <text x="370" y="143" text-anchor="middle" fill="white" font-size="22">🤖</text>
-                    <text x="370" y="166" text-anchor="middle" fill="white" font-weight="bold" font-size="14">OpenClaw</text>
-                    <text x="370" y="183" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="11">앱</text>
+                <!-- VS Code -->
+                <g class="diagram-element" data-tooltip="💻 VS Code<br>• 혜오니가 실제로 여는 작업 창<br>• Claude Code extension 설치됨<br>• 코드·파일 편집 + AI 대화 한 곳에서">
+                    <rect x="294" y="123" width="124" height="84" rx="13" fill="#eab308" filter="url(#shadow)"/>
+                    <text x="356" y="151" text-anchor="middle" fill="white" font-size="22">💻</text>
+                    <text x="356" y="171" text-anchor="middle" fill="white" font-weight="bold" font-size="13">VS Code</text>
+                    <text x="356" y="189" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="11">Claude Code ext.</text>
                 </g>
-                <text x="370" y="222" text-anchor="middle" fill="#4a5568" font-size="13">애플리케이션</text>
+                <text x="356" y="228" text-anchor="middle" fill="#4a5568" font-size="13">작업 환경</text>
 
-                <!-- 샌드박스 (OpenClaw 아래) -->
-                <g class="diagram-element" data-tooltip="📦 샌드박스<br>• OpenClaw가 명령을 실행하는 격리 공간<br>• 실제 맥북에 영향 없이 안전하게 실행<br>• exec 도구가 여기서 동작">
-                    <rect x="323" y="240" width="94" height="64" rx="10" fill="#9370db" filter="url(#shadow)"/>
-                    <text x="370" y="264" text-anchor="middle" fill="white" font-size="18">📦</text>
-                    <text x="370" y="285" text-anchor="middle" fill="white" font-weight="bold" font-size="12">샌드박스</text>
+                <!-- 화살표: VS Code → API -->
+                <path d="M 418 165 L 468 165" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+                <text x="443" y="153" text-anchor="middle" fill="#8898b0" font-size="11">호출</text>
+
+                <!-- 토큰 (API 오른쪽 위, 겹침 없게) -->
+                <g class="diagram-element" data-tooltip="🔑 토큰 (호텔 키카드)<br>• '나 진짜 사용자!' 증명서<br>• API 호출 시 인증에 사용<br>• 없으면 Claude에 접근 불가">
+                    <circle cx="660" cy="52" r="34" fill="#854d0e" filter="url(#shadow)"/>
+                    <text x="660" y="42" text-anchor="middle" fill="white" font-size="18">🔑</text>
+                    <text x="660" y="62" text-anchor="middle" fill="white" font-weight="bold" font-size="12">토큰</text>
                 </g>
-                <text x="370" y="321" text-anchor="middle" fill="#4a5568" font-size="13">격리 공간</text>
+                <text x="660" y="98" text-anchor="middle" fill="#4a5568" font-size="12">인증키</text>
 
-                <!-- 화살표: OpenClaw → 샌드박스 -->
-                <path d="M 370 197 L 370 240" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
-
-                <!-- exec (샌드박스 아래) -->
-                <g class="diagram-element" data-tooltip="⚙️ exec (명령 실행)<br>• 혜오니봇이 명령어를 실행하는 도구<br>• 샌드박스 안에서 안전하게 동작<br>• 파일 읽기/쓰기, 프로그램 실행 등">
-                    <rect x="330" y="338" width="80" height="54" rx="10" fill="#5a8fa8" filter="url(#shadow)"/>
-                    <text x="370" y="360" text-anchor="middle" fill="white" font-size="16">⚙️</text>
-                    <text x="370" y="379" text-anchor="middle" fill="white" font-weight="bold" font-size="12">exec</text>
-                </g>
-                <text x="370" y="410" text-anchor="middle" fill="#4a5568" font-size="13">명령 실행</text>
-
-                <!-- 화살표: 샌드박스 → exec -->
-                <path d="M 370 304 L 370 338" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
-
-                <!-- 토큰 -->
-                <g class="diagram-element" data-tooltip="🔑 토큰 (호텔 키카드)<br>• '나 진짜 사용자!' 증명서<br>• OAuth: Claude Pro 구독 연동<br>• Bot: 텔레그램 연결용">
-                    <circle cx="530" cy="68" r="30" fill="#f0a500" filter="url(#shadow)"/>
-                    <text x="530" y="60" text-anchor="middle" fill="white" font-size="17">🔑</text>
-                    <text x="530" y="79" text-anchor="middle" fill="white" font-weight="bold" font-size="13">토큰</text>
-                </g>
-                <text x="530" y="110" text-anchor="middle" fill="#4a5568" font-size="13">인증키</text>
-                <!-- 토큰 → OpenClaw 점선 -->
-                <path d="M 511 86 L 420 128" stroke="#f0a500" stroke-width="1.4" stroke-dasharray="5,4" fill="none" opacity="0.7"/>
-                <!-- 토큰 → API 점선 -->
-                <path d="M 549 86 L 578 128" stroke="#f0a500" stroke-width="1.4" stroke-dasharray="5,4" fill="none" opacity="0.7"/>
-
-                <!-- 화살표: OpenClaw → API -->
-                <path d="M 427 155 L 499 155" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
-                <text x="463" y="143" text-anchor="middle" fill="#8898b0" font-size="12">호출</text>
+                <!-- 토큰 → API 점선: 토큰 아래에서 API 위쪽으로 -->
+                <path d="M 640 84 L 560 123" stroke="#854d0e" stroke-width="1.4" stroke-dasharray="5,4" fill="none" marker-end="url(#arrow-amber)" opacity="0.8"/>
 
                 <!-- API -->
-                <g class="diagram-element" data-tooltip="📡 API (식당 웨이터)<br>• 앱과 서버 사이의 중간 전달자<br>• 요청을 받아 서버로 전달<br>• 응답을 받아 앱으로 돌려줌">
-                    <rect x="499" y="113" width="114" height="84" rx="13" fill="#8b5cf6" filter="url(#shadow)"/>
-                    <text x="556" y="143" text-anchor="middle" fill="white" font-size="22">📡</text>
-                    <text x="556" y="166" text-anchor="middle" fill="white" font-weight="bold" font-size="14">API</text>
-                    <text x="556" y="183" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="11">중간 전달자</text>
+                <g class="diagram-element" data-tooltip="📡 API (식당 웨이터)<br>• 앱과 서버 사이의 중간 전달자<br>• 요청을 받아 Claude 서버로 전달<br>• 응답을 받아 VS Code로 돌려줌">
+                    <rect x="468" y="123" width="124" height="84" rx="13" fill="#1e40af" filter="url(#shadow)"/>
+                    <text x="530" y="151" text-anchor="middle" fill="white" font-size="22">📡</text>
+                    <text x="530" y="171" text-anchor="middle" fill="white" font-weight="bold" font-size="14">API</text>
+                    <text x="530" y="189" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="11">중간 전달자</text>
                 </g>
-                <text x="556" y="222" text-anchor="middle" fill="#4a5568" font-size="13">중간 전달자</text>
+                <text x="530" y="228" text-anchor="middle" fill="#4a5568" font-size="13">중간 전달자</text>
 
                 <!-- 화살표: API → Claude -->
-                <path d="M 613 155 L 669 155" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
-                <text x="641" y="143" text-anchor="middle" fill="#8898b0" font-size="12">전달</text>
+                <path d="M 592 165 L 632 165" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+                <text x="612" y="153" text-anchor="middle" fill="#8898b0" font-size="11">전달</text>
 
                 <!-- Claude 서버 -->
                 <g class="diagram-element" data-tooltip="🏢 Claude 서버<br>• Anthropic이 운영하는 AI<br>• 실제로 답변을 생성하는 곳<br>• 클라우드에서 돌아가는 거대한 AI">
-                    <rect x="669" y="113" width="103" height="84" rx="13" fill="#3daf78" filter="url(#shadow)"/>
-                    <text x="720" y="143" text-anchor="middle" fill="white" font-size="22">🏢</text>
-                    <text x="720" y="166" text-anchor="middle" fill="white" font-weight="bold" font-size="14">Claude</text>
-                    <text x="720" y="183" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="11">서버</text>
+                    <rect x="632" y="123" width="140" height="84" rx="13" fill="#475569" filter="url(#shadow)"/>
+                    <text x="702" y="151" text-anchor="middle" fill="white" font-size="22">🏢</text>
+                    <text x="702" y="171" text-anchor="middle" fill="white" font-weight="bold" font-size="13">Claude 서버</text>
+                    <text x="702" y="189" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="11">Anthropic AI</text>
                 </g>
-                <text x="720" y="222" text-anchor="middle" fill="#4a5568" font-size="13">AI 서비스</text>
+                <text x="702" y="228" text-anchor="middle" fill="#4a5568" font-size="13">AI 서비스</text>
 
                 <!-- ══ 설치 순서 섹션 ══ -->
-                <rect x="14" y="408" width="772" height="248" rx="14" fill="#f7f9fc" stroke="#dde3ee" stroke-width="1.5"/>
-                <text x="26" y="430" text-anchor="middle" fill="#8898b0" font-size="13" font-weight="bold" letter-spacing="1">설치 순서</text>
+                <rect x="14" y="350" width="772" height="180" rx="14" fill="#f7f9fc" stroke="#dde3ee" stroke-width="1.5"/>
+                <text x="26" y="372" fill="#8898b0" font-size="13" font-weight="bold" letter-spacing="1">설치 순서</text>
 
-                <!-- macOS -->
-                <g class="diagram-element" data-tooltip="🍎 macOS (운영체제)<br>• 맥북을 작동시키는 기본 소프트웨어<br>• Windows처럼 모든 프로그램이 돌아가는 바탕">
-                    <rect x="28" y="444" width="110" height="80" rx="12" fill="#5a6a7e" filter="url(#shadow)"/>
-                    <text x="83" y="472" text-anchor="middle" fill="white" font-size="22">🍎</text>
-                    <text x="83" y="496" text-anchor="middle" fill="white" font-weight="bold" font-size="14">macOS</text>
+                <!-- 노드 너비 100, 간격 14, 시작 x=22 -->
+                <!-- macOS: cx=72 -->
+                <g class="diagram-element" data-tooltip="🍎 macOS (운영체제)<br>• 맥북을 작동시키는 기본 소프트웨어<br>• 모든 프로그램이 돌아가는 바탕">
+                    <rect x="22" y="388" width="100" height="68" rx="12" fill="#475569" filter="url(#shadow)"/>
+                    <text x="72" y="411" text-anchor="middle" fill="white" font-size="18">🍎</text>
+                    <text x="72" y="430" text-anchor="middle" fill="white" font-weight="bold" font-size="12">macOS</text>
                 </g>
-                <text x="83" y="542" text-anchor="middle" fill="#4a5568" font-size="13">운영체제</text>
+                <text x="72" y="470" text-anchor="middle" fill="#4a5568" font-size="11">운영체제</text>
 
-                <path d="M 138 484 L 162 484" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+                <path d="M 122 422 L 136 422" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
 
-                <!-- Homebrew -->
-                <g class="diagram-element" data-tooltip="🍺 Homebrew (이마트)<br>• 맥용 프로그램 설치 도구<br>• 뭐든지 설치 가능<br>• brew install 명령어 사용">
-                    <rect x="162" y="444" width="124" height="80" rx="12" fill="#1aaa8e" filter="url(#shadow)"/>
-                    <text x="224" y="472" text-anchor="middle" fill="white" font-size="22">🍺</text>
-                    <text x="224" y="496" text-anchor="middle" fill="white" font-weight="bold" font-size="14">Homebrew</text>
+                <!-- Homebrew: cx=193 -->
+                <g class="diagram-element" data-tooltip="🍺 Homebrew (이마트)<br>• 맥용 프로그램 설치 도구<br>• 뭐든지 한 줄 명령어로 설치<br>• brew install 명령어 사용">
+                    <rect x="136" y="388" width="114" height="68" rx="12" fill="#1a6b55" filter="url(#shadow)"/>
+                    <text x="193" y="411" text-anchor="middle" fill="white" font-size="18">🍺</text>
+                    <text x="193" y="430" text-anchor="middle" fill="white" font-weight="bold" font-size="12">Homebrew</text>
                 </g>
-                <text x="224" y="542" text-anchor="middle" fill="#4a5568" font-size="13">일반 마트</text>
+                <text x="193" y="470" text-anchor="middle" fill="#4a5568" font-size="11">일반 마트</text>
 
-                <path d="M 286 484 L 310 484" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+                <path d="M 250 422 L 264 422" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
 
-                <!-- Node.js -->
-                <g class="diagram-element" data-tooltip="🟢 Node.js (번역기)<br>• JavaScript를 컴퓨터에서 실행 가능하게<br>• OpenClaw의 실행 환경<br>• Homebrew로 설치">
-                    <rect x="310" y="444" width="110" height="80" rx="12" fill="#4caf50" filter="url(#shadow)"/>
-                    <text x="365" y="472" text-anchor="middle" fill="white" font-size="22">🟢</text>
-                    <text x="365" y="496" text-anchor="middle" fill="white" font-weight="bold" font-size="14">Node.js</text>
+                <!-- Node.js: cx=314 -->
+                <g class="diagram-element" data-tooltip="🟢 Node.js (번역기)<br>• JavaScript를 컴퓨터에서 실행 가능하게<br>• Claude Code의 실행 환경<br>• Homebrew로 설치">
+                    <rect x="264" y="388" width="100" height="68" rx="12" fill="#1a6b55" filter="url(#shadow)"/>
+                    <text x="314" y="411" text-anchor="middle" fill="white" font-size="18">🟢</text>
+                    <text x="314" y="430" text-anchor="middle" fill="white" font-weight="bold" font-size="12">Node.js</text>
                 </g>
-                <text x="365" y="542" text-anchor="middle" fill="#4a5568" font-size="13">번역기</text>
+                <text x="314" y="470" text-anchor="middle" fill="#4a5568" font-size="11">번역기</text>
 
-                <path d="M 420 484 L 444 484" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+                <path d="M 364 422 L 378 422" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
 
-                <!-- npm -->
+                <!-- npm: cx=428 -->
                 <g class="diagram-element" data-tooltip="📦 npm (하이마트)<br>• JavaScript 전용 쇼핑몰<br>• JS 프로그램 한번에 설치<br>• npm install 명령어 사용">
-                    <rect x="444" y="444" width="110" height="80" rx="12" fill="#d94f3a" filter="url(#shadow)"/>
-                    <text x="499" y="472" text-anchor="middle" fill="white" font-size="22">📦</text>
-                    <text x="499" y="496" text-anchor="middle" fill="white" font-weight="bold" font-size="14">npm</text>
+                    <rect x="378" y="388" width="100" height="68" rx="12" fill="#1a6b55" filter="url(#shadow)"/>
+                    <text x="428" y="411" text-anchor="middle" fill="white" font-size="18">📦</text>
+                    <text x="428" y="430" text-anchor="middle" fill="white" font-weight="bold" font-size="12">npm</text>
                 </g>
-                <text x="499" y="542" text-anchor="middle" fill="#4a5568" font-size="13">JS 전문점</text>
+                <text x="428" y="470" text-anchor="middle" fill="#4a5568" font-size="11">JS 전문점</text>
 
-                <path d="M 554 484 L 578 484" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+                <path d="M 478 422 L 492 422" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
 
-                <!-- OpenClaw (설치) -->
-                <g class="diagram-element" data-tooltip="🤖 OpenClaw 설치 완료!<br>• npm으로 설치된 최종 프로그램<br>• Node.js 위에서 실행<br>• 이제 AI와 대화 가능!">
-                    <rect x="578" y="444" width="124" height="80" rx="12" fill="#e8834a" filter="url(#shadow)"/>
-                    <text x="640" y="472" text-anchor="middle" fill="white" font-size="22">🤖</text>
-                    <text x="640" y="496" text-anchor="middle" fill="white" font-weight="bold" font-size="14">OpenClaw</text>
+                <!-- VS Code: cx=549 -->
+                <g class="diagram-element" data-tooltip="💻 VS Code<br>• 혜오니가 실제로 여는 작업 창<br>• Claude Code extension을 여기에 설치<br>• 직접 다운로드 후 설치">
+                    <rect x="492" y="388" width="114" height="68" rx="12" fill="#eab308" filter="url(#shadow)"/>
+                    <text x="549" y="411" text-anchor="middle" fill="white" font-size="18">💻</text>
+                    <text x="549" y="430" text-anchor="middle" fill="white" font-weight="bold" font-size="12">VS Code</text>
                 </g>
-                <text x="640" y="542" text-anchor="middle" fill="#4a5568" font-size="13">설치 완료!</text>
+                <text x="549" y="470" text-anchor="middle" fill="#4a5568" font-size="11">작업 환경</text>
 
-                <!-- 설치 → 사용 연결 점선 -->
-                <path d="M 640 444 C 640 410 370 408 370 197" stroke="#e8834a" stroke-width="1.6" stroke-dasharray="6,5" fill="none" marker-end="url(#arrow)" opacity="0.5"/>
+                <path d="M 606 422 L 620 422" stroke="#aab" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+
+                <!-- Claude Code: cx=710 -->
+                <g class="diagram-element" data-tooltip="🤖 Claude Code<br>• VS Code extension으로 설치<br>• Node.js + npm 위에서 실행<br>• 설치 완료 후 AI와 대화 가능!">
+                    <rect x="620" y="388" width="154" height="68" rx="12" fill="#eab308" filter="url(#shadow)"/>
+                    <text x="697" y="411" text-anchor="middle" fill="white" font-size="18">🤖</text>
+                    <text x="697" y="430" text-anchor="middle" fill="white" font-weight="bold" font-size="12">Claude Code</text>
+                </g>
+                <text x="697" y="470" text-anchor="middle" fill="#4a5568" font-size="11">설치 완료!</text>
 
                 <!-- 하단 안내 -->
-                <text x="400" y="580" text-anchor="middle" fill="#bbc" font-size="13">마우스를 올리면 각 용어의 설명을 볼 수 있어요</text>
+                <text x="400" y="550" text-anchor="middle" fill="#bbc" font-size="13">마우스를 올리면 각 용어의 설명을 볼 수 있어요</text>
             </svg>
         </div>
         
@@ -492,6 +482,52 @@
                     • <code>ask: always</code> → 명령어 실행 전 항상 혜오니 승인 필요<br>
                     • <code>security: allowlist</code> → 허용된 것만 실행 가능<br>
                     • <code>askFallback: deny</code> → 승인 UI 없으면 자동 차단
+                </div>
+            </details>
+        </div>
+
+        <!-- 🤖 AI 도구 -->
+        <div class="cat-section">
+            <div class="cat-header cat-header-ai">🤖 AI 도구</div>
+            <div class="cat-desc">AI와 대화하고 작업을 맡기는 도구들</div>
+
+            <details class="tech-term">
+                <summary>💻 VS Code</summary>
+                <div class="tech-content">
+                    <div class="term-summary">혜오니가 실제로 열고 작업하는 창</div>
+                    <div class="term-section">🍎 비유</div>
+                    작업실 같은 곳. 파일 편집, 터미널, AI 대화를 한 곳에서 다 할 수 있는 통합 작업 환경<br><br>
+                    <div class="term-section">🔧 설명</div>
+                    • Microsoft가 만든 무료 코드 편집기<br>
+                    • Claude Code extension 설치하면 AI와 바로 대화 가능<br>
+                    • 내장 터미널도 있지만 혜오니는 맥 터미널 앱을 따로 사용 중
+                </div>
+            </details>
+
+            <details class="tech-term">
+                <summary>🤖 Claude Code</summary>
+                <div class="tech-content">
+                    <div class="term-summary">개발자·파워유저를 위한 AI 코딩 도우미</div>
+                    <div class="term-section">🍎 비유</div>
+                    혜오니 옆에 앉아서 같이 파일 수정하고, GitHub에 올리고, 코드도 짜주는 유능한 동료<br><br>
+                    <div class="term-section">🔧 설명</div>
+                    • VS Code extension으로 설치해서 사용<br>
+                    • 파일 읽기·수정, 터미널 명령 실행, GitHub 푸시까지 가능<br>
+                    • 지금 혜오니와 이 용어사전 작업하는 것이 Claude Code 사용 예시
+                </div>
+            </details>
+
+            <details class="tech-term">
+                <summary>🏢 Claude Cowork</summary>
+                <div class="tech-content">
+                    <div class="term-summary">일반 직장인을 위한 AI 업무 자동화 도구</div>
+                    <div class="term-section">🍎 비유</div>
+                    이미 팀이 구성된 레스토랑. 주문 하나 하면 각자 역할대로 자동으로 돌아감. Claude Code가 혜오니가 중간중간 확인하며 함께 일하는 방식이라면, Cowork는 믿고 통째로 맡기는 방식<br><br>
+                    <div class="term-section">🔧 설명</div>
+                    • 2026년 1월 Anthropic 출시, 맥 전용 데스크탑 앱<br>
+                    • 엑셀, PPT, 이메일 등 오피스 업무 자동화에 특화<br>
+                    • Google Drive, Gmail 등 외부 서비스 연동 가능<br>
+                    • 내부적으로 여러 AI가 역할 나눠 동시에 처리 (멀티 에이전트)
                 </div>
             </details>
         </div>
