@@ -55,10 +55,21 @@
             margin-bottom: 30px;
             box-sizing: border-box;
         }
-        .work { border-left-color: #e74c3c; }
-        .idea { border-left-color: #f39c12; }
-        .personal { border-left-color: #2ecc71; }
-        .learning { border-left-color: #9b59b6; }
+        .tag {
+            display: inline-block;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin: 2px 2px 6px 0;
+            font-weight: 600;
+        }
+        .tag-cmd    { background: #e8eaf0; color: #4a5568; }
+        .tag-install { background: #d4f5ec; color: #1a6b55; }
+        .tag-comm   { background: #dbeafe; color: #1e40af; }
+        .tag-sec    { background: #fef9c3; color: #854d0e; }
+        .tag-lang   { background: #ffedd5; color: #9a3412; }
+        .term-summary { color: #6c757d; font-size: 13px; margin: 4px 0 10px; font-style: italic; }
+        .term-section { font-weight: bold; color: #4a5568; margin-top: 10px; margin-bottom: 4px; font-size: 13px; }
         
         .tech-term {
             background: #f8f9fa;
@@ -315,219 +326,133 @@
         <details class="tech-term">
             <summary>🔑 토큰 (Token)</summary>
             <div class="tech-content">
-                <div class="date">2026-02-20</div>
-                <strong>🍎 쉬운 비유:</strong> 호텔 키카드 같은 거!<br>
-                • 호텔에서 체크인하면 → 키카드 받음 → 내 방 열 수 있음<br>
-                • 웹서비스에서 로그인하면 → 토큰 받음 → 내 계정으로 작업 가능<br><br>
-                <strong>🔧 기술적으로:</strong><br>
+                <span class="tag tag-sec">🔐 보안·인증</span>
+                <div class="term-summary">호텔 키카드처럼 '나 진짜 사용자야!'를 증명하는 것</div>
+                <div class="term-section">🍎 비유</div>
+                호텔에서 체크인하면 키카드 받듯, 웹서비스에 로그인하면 토큰을 받음<br><br>
+                <div class="term-section">🔧 설명</div>
                 • <strong>API 토큰</strong> = "나 진짜 사용자 맞아!" 증명서<br>
                 • <strong>OAuth 토큰</strong> = 다른 앱이 내 계정 대신 사용할 수 있게 해주는 허가증<br>
                 • <strong>Bot 토큰</strong> = 봇이 메신저에서 활동할 수 있게 해주는 신분증
             </div>
         </details>
-        
+
         <details class="tech-term">
             <summary>📡 API (Application Programming Interface)</summary>
             <div class="tech-content">
-                <div class="date">2026-02-20</div>
-                <strong>🍎 쉬운 비유:</strong> 식당 웨이터!<br>
-                • 손님(앱) → 웨이터(API) → 주방(서버)<br>
-                • "햄버거 하나 주세요" → 웨이터가 전달 → 주방에서 만들어서 가져옴<br>
-                • 손님은 주방에 직접 들어갈 수 없고, 웨이터를 통해서만 주문 가능<br><br>
-                <strong>🔧 실제 예시:</strong><br>
+                <span class="tag tag-comm">🗣️ 소통 방식</span>
+                <div class="term-summary">앱과 서버 사이의 중간 전달자 (식당 웨이터)</div>
+                <div class="term-section">🍎 비유</div>
+                손님(앱) → 웨이터(API) → 주방(서버). 손님은 주방에 직접 못 들어가고 웨이터를 통해서만 주문 가능<br><br>
+                <div class="term-section">🔧 설명</div>
                 • 날씨 앱 → 기상청 API → 날씨 정보 받아옴<br>
                 • 혜오니봇 → Claude API → AI 응답 받아옴
             </div>
         </details>
 
         <details class="tech-term">
+            <summary>🖥️ CLI (Command Line Interface)</summary>
+            <div class="tech-content">
+                <span class="tag tag-comm">🗣️ 소통 방식</span>
+                <div class="term-summary">마우스 없이 글자로만 컴퓨터에 명령하는 방식</div>
+                <div class="term-section">🍎 비유</div>
+                일반 방식은 폴더 열 때 마우스로 더블클릭. CLI는 <code>cd 폴더명</code> 이라고 타이핑<br><br>
+                <div class="term-section">🔧 설명</div>
+                맥에서는 터미널 앱 = CLI를 쓸 수 있게 해주는 앱. 그래픽 없이 텍스트로만 컴퓨터랑 대화하는 것
+            </div>
+        </details>
+
+        <details class="tech-term">
             <summary>🍺 Homebrew</summary>
             <div class="tech-content">
-                <div class="date">2026-02-20</div>
-                <strong>🍎 쉬운 비유:</strong> 맥북의 편의점!<br>
-                • 일반 편의점에서 "라면 주세요" → 직원이 가져다줌<br>
-                • Homebrew에서 "Node.js 주세요" → 알아서 다운로드해서 설치해줌<br>
-                • <code>brew install 프로그램명</code> → 자동으로 설치<br><br>
-                <strong>🔧 실제로는:</strong><br>
-                • 맥용 **패키지 매니저** (프로그램 설치 도구)<br>
-                • 복잡한 설치 과정을 **한 줄 명령어**로 간단하게<br>
-                • 업데이트, 삭제도 쉽게 관리
+                <span class="tag tag-install">🛒 설치 도구</span>
+                <div class="term-summary">맥북의 편의점. 뭐든지 한 줄 명령어로 설치해줌</div>
+                <div class="term-section">🍎 비유</div>
+                편의점에서 '라면 주세요' 하듯, <code>brew install 프로그램명</code> 하면 알아서 다운받아 설치<br><br>
+                <div class="term-section">🔧 설명</div>
+                맥용 패키지 매니저. 복잡한 설치 과정을 한 줄 명령어로 간단하게. 업데이트, 삭제도 쉽게 관리 가능
             </div>
         </details>
 
         <details class="tech-term">
             <summary>🟢 Node.js</summary>
             <div class="tech-content">
-                <div class="date">2026-02-20</div>
-                <strong>🍎 초간단 비유:</strong> 한국어만 아는 외국인 친구를 위한 **번역기**!<br><br>
-                
-                <strong>📱 상황 설명:</strong><br>
-                • JavaScript = 외국인 친구 (똑똑하지만 **웹브라우저 안에서만** 일할 수 있음)<br>
-                • 맥북 = 한국 (웹브라우저 밖의 세상)<br>
-                • Node.js = **번역기** (외국인 친구가 한국에서도 일할 수 있게 도와줌)<br><br>
-                
-                <strong>🎯 결과:</strong><br>
+                <span class="tag tag-install">🛒 설치 도구</span><span class="tag tag-lang">📦 언어·실행</span>
+                <div class="term-summary">JavaScript를 맥북에서 실행할 수 있게 해주는 번역기</div>
+                <div class="term-section">🍎 비유</div>
+                JavaScript는 웹브라우저 안에서만 일할 수 있는 외국인 친구. Node.js는 그 친구가 맥북(한국)에서도 일할 수 있게 해주는 번역기<br><br>
+                <div class="term-section">🔧 설명</div>
                 • Node.js 없으면 → JavaScript는 웹페이지에서만 작동<br>
-                • Node.js 있으면 → JavaScript가 **맥북에서 OpenClaw** 같은 프로그램도 만들 수 있음<br><br>
-                
-                <strong>🔧 즉:</strong> OpenClaw가 JavaScript로 만들어져서 Node.js가 필요한 거야!
+                • Node.js 있으면 → OpenClaw 같은 프로그램도 만들 수 있음<br>
+                • OpenClaw가 JavaScript로 만들어져서 Node.js 필요!
             </div>
         </details>
 
         <details class="tech-term">
             <summary>📦 npm</summary>
             <div class="tech-content">
-                <div class="date">2026-02-20</div>
-                <strong>🍎 초간단 비유:</strong> **전자제품 전문점** (하이마트 같은 곳)!<br><br>
-                
-                <strong>🛍️ 상황 설명:</strong><br>
-                • 혜오니가 책상 만들고 싶어 → 나사, 목재, 손잡이 필요<br>
-                • 하나하나 다른 가게 돌아다니기 힘들어 → **전문점에서 한번에** 주문<br>
-                • 개발자가 JavaScript 프로그램 만들고 싶어 → 여러 기능 부품들 필요<br>
-                • 하나하나 찾기 힘들어 → **npm에서 한번에** 다운로드<br><br>
-                
-                <strong>🎯 실제 사용:</strong><br>
-                • <code>npm install openclaw</code> = "전문점에서 OpenClaw 주문하기"<br>
-                • 자동으로 필요한 모든 부품들까지 함께 배송됨<br><br>
-                
-                <strong>🔧 중요:</strong> **JavaScript/Node.js 전용** 쇼핑몰이야!
+                <span class="tag tag-install">🛒 설치 도구</span>
+                <div class="term-summary">JavaScript 전용 쇼핑몰 (하이마트 같은 곳)</div>
+                <div class="term-section">🍎 비유</div>
+                혜오니가 책상 만들려면 나사, 목재 등이 필요하듯, 개발자가 JS 프로그램 만들 때 필요한 부품들을 한번에 주문할 수 있는 전문점<br><br>
+                <div class="term-section">🔧 설명</div>
+                • <code>npm install openclaw</code> = 전문점에서 OpenClaw 주문하기<br>
+                • 자동으로 필요한 모든 부품들까지 함께 배송됨<br>
+                • JavaScript/Node.js 전용 쇼핑몰!
             </div>
         </details>
 
         <details class="tech-term">
             <summary>⚡ JavaScript (JS)</summary>
             <div class="tech-content">
-                <div class="date">2026-02-20</div>
-                <strong>🍎 초간단 비유:</strong> **컴퓨터 언어** (영어, 한국어처럼)!<br><br>
-                
-                <strong>🗣️ 상황 설명:</strong><br>
-                • 사람들끼리 대화할 때 → 한국어, 영어 사용<br>
-                • 컴퓨터랑 대화할 때 → JavaScript, Python, Java 등 사용<br>
-                • JavaScript = 컴퓨터에게 **"이렇게 해줘"** 라고 지시하는 언어<br><br>
-                
-                <strong>🌐 원래 용도:</strong><br>
-                • 웹페이지를 **움직이게** 만드는 언어 (버튼 클릭, 애니메이션 등)<br>
-                • 지금은 **모든 종류 프로그램**도 만들 수 있음<br><br>
-                
-                <strong>🎯 JS 프로그램 예시:</strong><br>
-                • **OpenClaw** = JavaScript로 작성된 프로그램<br>
-                • **VS Code** (코드 편집기) = JavaScript로 만듦<br>
-                • **Discord** = JavaScript로 만듦<br><br>
-                
-                <strong>🔧 즉:</strong> JavaScript라는 언어로 작성된 컴퓨터 프로그램!
-            </div>
-        </details>
-
-        <details class="tech-term">
-            <summary>🔄 Homebrew vs npm 차이점</summary>
-            <div class="tech-content">
-                <div class="date">2026-02-20</div>
-                <strong>🍎 쉬운 비유:</strong> **일반 마트 vs 전문점** 차이!<br><br>
-                
-                <strong>🍺 Homebrew = 이마트/코스트코 (일반 대형마트)</strong><br>
-                • **모든 종류** 물건 판매: 음식, 옷, 전자제품, 생활용품<br>
-                • **맥용 프로그램** 뭐든지: Chrome, Zoom, Node.js, Python 등<br>
-                • <code>brew install 프로그램명</code><br><br>
-                
-                <strong>📦 npm = 하이마트 (전자제품 전문점)</strong><br>
-                • **JavaScript/Node.js 전용** 프로그램만 판매<br>
-                • OpenClaw, Express, React 같은 **JavaScript 생태계** 물건들<br>
-                • <code>npm install 패키지명</code><br><br>
-                
-                <strong>🎯 실제 사용 예:</strong><br>
-                • Node.js 설치 → <code>brew install node</code> (이마트에서 사기)<br>
-                • OpenClaw 설치 → <code>npm install openclaw</code> (하이마트에서 사기)<br><br>
-                
-                <strong>📝 정리:</strong> Homebrew로 기본 도구들 설치하고, npm으로 JavaScript 프로그램들 설치!
-            </div>
-        </details>
-
-        <details class="tech-term">
-            <summary>⚙️ OpenClaw 설치 과정 (macOS)</summary>
-            <div class="tech-content">
-                <div class="date">2026-02-20</div>
-                <strong>1️⃣ 기본 준비물 설치:</strong><br>
-                • <code>Homebrew 5.0.14</code> → 맥 패키지 매니저<br>
-                • <code>Node.js v25.6.0</code> → JavaScript 실행 환경<br>
-                • <code>npm 11.8.0</code> → Node 패키지 매니저<br><br>
-                
-                <strong>2️⃣ OpenClaw 설치:</strong><br>
-                • <code>npm install -g openclaw</code><br>
-                • 설치 위치: <code>/usr/local/bin/openclaw</code><br><br>
-                
-                <strong>3️⃣ 초기 설정:</strong><br>
-                • <code>openclaw wizard onboard</code> → 설정 마법사<br>
-                • <strong>Claude OAuth 로그인 연동</strong><br>
-                • <strong>텔레그램 봇 토큰 연결</strong><br>
-                • 워크스페이스 경로 설정<br><br>
-                
-                <strong>🔑 필요한 토큰들:</strong><br>
-                • <strong>Claude OAuth 토큰</strong>: sk-ant-oat01-****(마스킹)<br>
-                &nbsp;&nbsp;→ Claude Pro 구독 연동, API 비용 없음<br>
-                • <strong>텔레그램 봇 토큰</strong>: @BotFather에서 발급<br>
-                &nbsp;&nbsp;→ 메시지 송수신용, dmPolicy="pairing" 설정<br>
-                ⚠️ <em>두 토큰 모두 절대 외부 공유 금지!</em><br><br>
-                
-                <strong>📝 참고:</strong> 회사 멘토님의 도움으로 설치 완료!<br>
-                <em>다른 분들께 공유할 때 참고용</em>
-            </div>
-        </details>
-
-        <details class="tech-term">
-            <summary>🖥️ CLI (Command Line Interface)</summary>
-            <div class="tech-content">
-                <div class="date">2026-02-21</div>
-                <strong>🍎 쉬운 비유:</strong> 마우스 없이 <strong>글자로만</strong> 컴퓨터에 명령하는 방식!<br><br>
-                <strong>📱 상황 설명:</strong><br>
-                • 일반 방식 → 폴더 열 때 마우스로 더블클릭<br>
-                • CLI 방식 → <code>cd 폴더명</code> 이라고 타이핑<br><br>
-                <strong>🎯 맥에서는:</strong><br>
-                • <strong>터미널 앱</strong> = 맥에서 CLI를 쓸 수 있게 해주는 앱<br>
-                • 그래픽 없이 텍스트로만 컴퓨터랑 대화하는 것
+                <span class="tag tag-lang">📦 언어·실행</span>
+                <div class="term-summary">컴퓨터에게 '이렇게 해줘' 라고 지시하는 언어</div>
+                <div class="term-section">🍎 비유</div>
+                사람들끼리 한국어, 영어로 대화하듯 컴퓨터랑 대화하는 언어. 원래는 웹페이지를 움직이게 만드는 언어였는데 지금은 모든 종류 프로그램 다 만들 수 있음<br><br>
+                <div class="term-section">🔧 설명</div>
+                JS 프로그램 예시: OpenClaw, VS Code, Discord 모두 JavaScript로 만들어짐
             </div>
         </details>
 
         <details class="tech-term">
             <summary>📦 샌드박스 (Sandbox)</summary>
             <div class="tech-content">
-                <div class="date">2026-02-21</div>
-                <strong>🍎 쉬운 비유:</strong> 어린이 <strong>모래놀이터</strong>!<br><br>
-                • 놀이터 안에서 뭘 만들든 부수든 → 놀이터 밖에는 영향 없음<br>
-                • 컴퓨터도 똑같이 프로그램을 <strong>격리된 공간</strong>에 가둬두는 것<br><br>
-                <strong>🔧 LLM에서의 샌드박스:</strong><br>
-                • AI가 코드를 실행할 때 쓰는 <strong>안전 격리 공간</strong><br>
+                <span class="tag tag-lang">📦 언어·실행</span>
+                <div class="term-summary">프로그램을 안전하게 가둬두는 격리된 공간</div>
+                <div class="term-section">🍎 비유</div>
+                어린이 모래놀이터. 놀이터 안에서 뭘 만들든 부수든 놀이터 밖에는 영향 없음<br><br>
+                <div class="term-section">🔧 설명</div>
+                • AI가 코드를 실행할 때 쓰는 안전 격리 공간<br>
                 • 실제 컴퓨터와 분리된 임시 공간에서 실행 → 결과만 돌려줌<br>
-                • 실행 끝나면 그 공간은 사라짐<br><br>
-                <strong>🐥 혜오니봇 기준:</strong><br>
-                • 내가 명령어 실행할 때 샌드박스 안에서 돌아감<br>
-                • 단, OpenClaw가 허용한 경로(iCloud 폴더 등)는 접근 가능
+                • 혜오니봇 기준: OpenClaw가 허용한 경로(iCloud 폴더 등)는 접근 가능
             </div>
         </details>
 
         <details class="tech-term">
             <summary>⚙️ exec (Execute)</summary>
             <div class="tech-content">
-                <div class="date">2026-02-21</div>
-                <strong>🍎 쉬운 비유:</strong> 혜오니봇이 <strong>터미널에 명령어를 실행하는 도구</strong>!<br><br>
-                • CLI로 하는 작업들을 내가 대신 해주는 것<br>
-                • 파일 목록 보기, 파일 수정, 프로그램 설치 등<br><br>
-                <strong>🔐 보안 설정 (2026-02-21 적용):</strong><br>
+                <span class="tag tag-cmd">⚙️ 명령·제어</span>
+                <div class="term-summary">혜오니봇이 터미널에 명령어를 실행하는 도구</div>
+                <div class="term-section">🍎 비유</div>
+                CLI로 하는 작업들(파일 목록 보기, 파일 수정, 프로그램 설치 등)을 봇이 대신 해주는 것<br><br>
+                <div class="term-section">🔧 설명</div>
                 • <code>ask: always</code> → 명령어 실행 전 항상 혜오니 승인 필요<br>
                 • <code>security: allowlist</code> → 허용된 것만 실행 가능<br>
-                • <code>askFallback: deny</code> → 승인 UI 없으면 자동 차단<br>
-                • 설정 파일: <code>~/.openclaw/exec-approvals.json</code>
+                • <code>askFallback: deny</code> → 승인 UI 없으면 자동 차단
             </div>
         </details>
 
         <details class="tech-term">
-            <summary>🔧 현재 설치된 버전 정보</summary>
+            <summary>🔄 Homebrew vs npm 차이점</summary>
             <div class="tech-content">
-                <div class="date">2026-02-20</div>
-                <strong>OpenClaw:</strong> 2026.2.9<br>
-                <strong>Node.js:</strong> v25.6.0<br>
-                <strong>npm:</strong> 11.8.0<br>
-                <strong>Homebrew:</strong> 5.0.14<br>
-                <strong>OS:</strong> macOS (Darwin 25.2.0 arm64)
+                <span class="tag tag-install">🛒 설치 도구</span>
+                <div class="term-summary">Homebrew = 이마트(뭐든지), npm = 하이마트(JS 전용)</div>
+                <div class="term-section">🍎 비유</div>
+                Homebrew는 이마트/코스트코처럼 모든 종류 맥용 프로그램 설치. npm은 하이마트처럼 JavaScript 전용 프로그램만<br><br>
+                <div class="term-section">🔧 설명</div>
+                • Node.js 설치 → <code>brew install node</code> (이마트에서)<br>
+                • OpenClaw 설치 → <code>npm install openclaw</code> (하이마트에서)<br>
+                • Homebrew로 기본 도구 설치 후, npm으로 JS 프로그램 설치!
             </div>
         </details>
 
