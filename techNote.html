@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>혜오니의 테크 노트</title>
+    <title>혜오니의 테크 노트 ⚡</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui;
@@ -70,6 +70,14 @@
         .tag-lang   { background: #ffedd5; color: #9a3412; }
         .term-summary { color: #6c757d; font-size: 13px; margin: 4px 0 10px; font-style: italic; }
         .term-section { font-weight: bold; color: #4a5568; margin-top: 10px; margin-bottom: 4px; font-size: 13px; }
+        .cat-section { margin: 24px 0 8px; }
+        .cat-header { font-size: 15px; font-weight: 700; padding: 8px 14px; border-radius: 8px; display: inline-block; margin-bottom: 4px; }
+        .cat-header-install { background: #d4f5ec; color: #1a6b55; }
+        .cat-header-lang    { background: #ffedd5; color: #9a3412; }
+        .cat-header-comm    { background: #dbeafe; color: #1e40af; }
+        .cat-header-sec     { background: #fef9c3; color: #854d0e; }
+        .cat-header-cmd     { background: #e8eaf0; color: #4a5568; }
+        .cat-desc { font-size: 12px; color: #8898b0; margin: 2px 0 10px 4px; }
         
         .tech-term {
             background: #f8f9fa;
@@ -142,11 +150,10 @@
 </head>
 <body>
     <div class="header">
-        <h1>혜오니의 테크 노트</h1>
+        <h1>혜오니의 테크 노트 ⚡</h1>
         <small>마지막 업데이트: 2026-03-15</small>
     </div>
 
-    <input type="text" id="searchBox" class="search-box" placeholder="🔍 용어 검색...">
 
     <div class="category">
         <h2>📖 기술 용어사전</h2>
@@ -323,138 +330,171 @@
             </svg>
         </div>
         
-        <details class="tech-term">
-            <summary>🔑 토큰 (Token)</summary>
-            <div class="tech-content">
-                <span class="tag tag-sec">🔐 보안·인증</span>
-                <div class="term-summary">호텔 키카드처럼 '나 진짜 사용자야!'를 증명하는 것</div>
-                <div class="term-section">🍎 비유</div>
-                호텔에서 체크인하면 키카드 받듯, 웹서비스에 로그인하면 토큰을 받음<br><br>
-                <div class="term-section">🔧 설명</div>
-                • <strong>API 토큰</strong> = "나 진짜 사용자 맞아!" 증명서<br>
-                • <strong>OAuth 토큰</strong> = 다른 앱이 내 계정 대신 사용할 수 있게 해주는 허가증<br>
-                • <strong>Bot 토큰</strong> = 봇이 메신저에서 활동할 수 있게 해주는 신분증
-            </div>
-        </details>
+        <!-- 🛒 설치 도구 -->
+        <div class="cat-section">
+            <div class="cat-header cat-header-install">🛒 설치 도구</div>
+            <div class="cat-desc">프로그램을 맥북에 설치·관리하는 도구들</div>
 
-        <details class="tech-term">
-            <summary>📡 API (Application Programming Interface)</summary>
-            <div class="tech-content">
-                <span class="tag tag-comm">🗣️ 소통 방식</span>
-                <div class="term-summary">앱과 서버 사이의 중간 전달자 (식당 웨이터)</div>
-                <div class="term-section">🍎 비유</div>
-                손님(앱) → 웨이터(API) → 주방(서버). 손님은 주방에 직접 못 들어가고 웨이터를 통해서만 주문 가능<br><br>
-                <div class="term-section">🔧 설명</div>
-                • 날씨 앱 → 기상청 API → 날씨 정보 받아옴<br>
-                • 혜오니봇 → Claude API → AI 응답 받아옴
-            </div>
-        </details>
+            <details class="tech-term">
+                <summary>🍺 Homebrew</summary>
+                <div class="tech-content">
+                    <div class="term-summary">맥북의 편의점. 뭐든지 한 줄 명령어로 설치해줌</div>
+                    <div class="term-section">🍎 비유</div>
+                    편의점에서 '라면 주세요' 하듯, <code>brew install 프로그램명</code> 하면 알아서 다운받아 설치<br><br>
+                    <div class="term-section">🔧 설명</div>
+                    맥용 패키지 매니저. 복잡한 설치 과정을 한 줄 명령어로 간단하게. 업데이트, 삭제도 쉽게 관리 가능
+                </div>
+            </details>
 
-        <details class="tech-term">
-            <summary>🖥️ CLI (Command Line Interface)</summary>
-            <div class="tech-content">
-                <span class="tag tag-comm">🗣️ 소통 방식</span>
-                <div class="term-summary">마우스 없이 글자로만 컴퓨터에 명령하는 방식</div>
-                <div class="term-section">🍎 비유</div>
-                일반 방식은 폴더 열 때 마우스로 더블클릭. CLI는 <code>cd 폴더명</code> 이라고 타이핑<br><br>
-                <div class="term-section">🔧 설명</div>
-                맥에서는 터미널 앱 = CLI를 쓸 수 있게 해주는 앱. 그래픽 없이 텍스트로만 컴퓨터랑 대화하는 것
-            </div>
-        </details>
+            <details class="tech-term">
+                <summary>📦 npm</summary>
+                <div class="tech-content">
+                    <div class="term-summary">JavaScript 전용 쇼핑몰 (하이마트 같은 곳)</div>
+                    <div class="term-section">🍎 비유</div>
+                    혜오니가 책상 만들려면 나사, 목재 등이 필요하듯, 개발자가 JS 프로그램 만들 때 필요한 부품들을 한번에 주문할 수 있는 전문점<br><br>
+                    <div class="term-section">🔧 설명</div>
+                    • <code>npm install openclaw</code> = 전문점에서 OpenClaw 주문하기<br>
+                    • 자동으로 필요한 모든 부품들까지 함께 배송됨<br>
+                    • JavaScript/Node.js 전용 쇼핑몰!
+                </div>
+            </details>
 
-        <details class="tech-term">
-            <summary>🍺 Homebrew</summary>
-            <div class="tech-content">
-                <span class="tag tag-install">🛒 설치 도구</span>
-                <div class="term-summary">맥북의 편의점. 뭐든지 한 줄 명령어로 설치해줌</div>
-                <div class="term-section">🍎 비유</div>
-                편의점에서 '라면 주세요' 하듯, <code>brew install 프로그램명</code> 하면 알아서 다운받아 설치<br><br>
-                <div class="term-section">🔧 설명</div>
-                맥용 패키지 매니저. 복잡한 설치 과정을 한 줄 명령어로 간단하게. 업데이트, 삭제도 쉽게 관리 가능
-            </div>
-        </details>
+            <details class="tech-term">
+                <summary>🟢 Node.js</summary>
+                <div class="tech-content">
+                    <div class="term-summary">JavaScript를 맥북에서 실행할 수 있게 해주는 번역기</div>
+                    <div class="term-section">🍎 비유</div>
+                    JavaScript는 웹브라우저 안에서만 일할 수 있는 외국인 친구. Node.js는 그 친구가 맥북(한국)에서도 일할 수 있게 해주는 번역기<br><br>
+                    <div class="term-section">🔧 설명</div>
+                    • Node.js 없으면 → JavaScript는 웹페이지에서만 작동<br>
+                    • Node.js 있으면 → OpenClaw 같은 프로그램도 만들 수 있음<br>
+                    • OpenClaw가 JavaScript로 만들어져서 Node.js 필요!
+                </div>
+            </details>
 
-        <details class="tech-term">
-            <summary>🟢 Node.js</summary>
-            <div class="tech-content">
-                <span class="tag tag-install">🛒 설치 도구</span><span class="tag tag-lang">📦 언어·실행</span>
-                <div class="term-summary">JavaScript를 맥북에서 실행할 수 있게 해주는 번역기</div>
-                <div class="term-section">🍎 비유</div>
-                JavaScript는 웹브라우저 안에서만 일할 수 있는 외국인 친구. Node.js는 그 친구가 맥북(한국)에서도 일할 수 있게 해주는 번역기<br><br>
-                <div class="term-section">🔧 설명</div>
-                • Node.js 없으면 → JavaScript는 웹페이지에서만 작동<br>
-                • Node.js 있으면 → OpenClaw 같은 프로그램도 만들 수 있음<br>
-                • OpenClaw가 JavaScript로 만들어져서 Node.js 필요!
-            </div>
-        </details>
+            <details class="tech-term">
+                <summary>🔄 Homebrew vs npm 차이점</summary>
+                <div class="tech-content">
+                    <div class="term-summary">Homebrew = 이마트(뭐든지), npm = 하이마트(JS 전용)</div>
+                    <div class="term-section">🍎 비유</div>
+                    Homebrew는 이마트/코스트코처럼 모든 종류 맥용 프로그램 설치. npm은 하이마트처럼 JavaScript 전용 프로그램만<br><br>
+                    <div class="term-section">🔧 설명</div>
+                    • Node.js 설치 → <code>brew install node</code> (이마트에서)<br>
+                    • OpenClaw 설치 → <code>npm install openclaw</code> (하이마트에서)<br>
+                    • Homebrew로 기본 도구 설치 후, npm으로 JS 프로그램 설치!
+                </div>
+            </details>
+        </div>
 
-        <details class="tech-term">
-            <summary>📦 npm</summary>
-            <div class="tech-content">
-                <span class="tag tag-install">🛒 설치 도구</span>
-                <div class="term-summary">JavaScript 전용 쇼핑몰 (하이마트 같은 곳)</div>
-                <div class="term-section">🍎 비유</div>
-                혜오니가 책상 만들려면 나사, 목재 등이 필요하듯, 개발자가 JS 프로그램 만들 때 필요한 부품들을 한번에 주문할 수 있는 전문점<br><br>
-                <div class="term-section">🔧 설명</div>
-                • <code>npm install openclaw</code> = 전문점에서 OpenClaw 주문하기<br>
-                • 자동으로 필요한 모든 부품들까지 함께 배송됨<br>
-                • JavaScript/Node.js 전용 쇼핑몰!
-            </div>
-        </details>
+        <!-- 📦 언어·실행 -->
+        <div class="cat-section">
+            <div class="cat-header cat-header-lang">📦 언어·실행</div>
+            <div class="cat-desc">프로그램이 어떤 언어로 만들어지고 어디서 실행되는지</div>
 
-        <details class="tech-term">
-            <summary>⚡ JavaScript (JS)</summary>
-            <div class="tech-content">
-                <span class="tag tag-lang">📦 언어·실행</span>
-                <div class="term-summary">컴퓨터에게 '이렇게 해줘' 라고 지시하는 언어</div>
-                <div class="term-section">🍎 비유</div>
-                사람들끼리 한국어, 영어로 대화하듯 컴퓨터랑 대화하는 언어. 원래는 웹페이지를 움직이게 만드는 언어였는데 지금은 모든 종류 프로그램 다 만들 수 있음<br><br>
-                <div class="term-section">🔧 설명</div>
-                JS 프로그램 예시: OpenClaw, VS Code, Discord 모두 JavaScript로 만들어짐
-            </div>
-        </details>
+            <details class="tech-term">
+                <summary>⚡ JavaScript (JS)</summary>
+                <div class="tech-content">
+                    <div class="term-summary">컴퓨터에게 '이렇게 해줘' 라고 지시하는 언어</div>
+                    <div class="term-section">🍎 비유</div>
+                    사람들끼리 한국어, 영어로 대화하듯 컴퓨터랑 대화하는 언어. 원래는 웹페이지를 움직이게 만드는 언어였는데 지금은 모든 종류 프로그램 다 만들 수 있음<br><br>
+                    <div class="term-section">🔧 설명</div>
+                    JS 프로그램 예시: OpenClaw, VS Code, Discord 모두 JavaScript로 만들어짐
+                </div>
+            </details>
 
-        <details class="tech-term">
-            <summary>📦 샌드박스 (Sandbox)</summary>
-            <div class="tech-content">
-                <span class="tag tag-lang">📦 언어·실행</span>
-                <div class="term-summary">프로그램을 안전하게 가둬두는 격리된 공간</div>
-                <div class="term-section">🍎 비유</div>
-                어린이 모래놀이터. 놀이터 안에서 뭘 만들든 부수든 놀이터 밖에는 영향 없음<br><br>
-                <div class="term-section">🔧 설명</div>
-                • AI가 코드를 실행할 때 쓰는 안전 격리 공간<br>
-                • 실제 컴퓨터와 분리된 임시 공간에서 실행 → 결과만 돌려줌<br>
-                • 혜오니봇 기준: OpenClaw가 허용한 경로(iCloud 폴더 등)는 접근 가능
-            </div>
-        </details>
+            <details class="tech-term">
+                <summary>🟢 Node.js</summary>
+                <div class="tech-content">
+                    <div class="term-summary">JavaScript를 맥북에서 실행할 수 있게 해주는 번역기</div>
+                    <div class="term-section">🍎 비유</div>
+                    JavaScript는 웹브라우저 안에서만 일할 수 있는 외국인 친구. Node.js는 그 친구가 맥북(한국)에서도 일할 수 있게 해주는 번역기<br><br>
+                    <div class="term-section">🔧 설명</div>
+                    • Node.js 없으면 → JavaScript는 웹페이지에서만 작동<br>
+                    • Node.js 있으면 → OpenClaw 같은 프로그램도 만들 수 있음<br>
+                    • OpenClaw가 JavaScript로 만들어져서 Node.js 필요!
+                </div>
+            </details>
 
-        <details class="tech-term">
-            <summary>⚙️ exec (Execute)</summary>
-            <div class="tech-content">
-                <span class="tag tag-cmd">⚙️ 명령·제어</span>
-                <div class="term-summary">혜오니봇이 터미널에 명령어를 실행하는 도구</div>
-                <div class="term-section">🍎 비유</div>
-                CLI로 하는 작업들(파일 목록 보기, 파일 수정, 프로그램 설치 등)을 봇이 대신 해주는 것<br><br>
-                <div class="term-section">🔧 설명</div>
-                • <code>ask: always</code> → 명령어 실행 전 항상 혜오니 승인 필요<br>
-                • <code>security: allowlist</code> → 허용된 것만 실행 가능<br>
-                • <code>askFallback: deny</code> → 승인 UI 없으면 자동 차단
-            </div>
-        </details>
+            <details class="tech-term">
+                <summary>📦 샌드박스 (Sandbox)</summary>
+                <div class="tech-content">
+                    <div class="term-summary">프로그램을 안전하게 가둬두는 격리된 공간</div>
+                    <div class="term-section">🍎 비유</div>
+                    어린이 모래놀이터. 놀이터 안에서 뭘 만들든 부수든 놀이터 밖에는 영향 없음<br><br>
+                    <div class="term-section">🔧 설명</div>
+                    • AI가 코드를 실행할 때 쓰는 안전 격리 공간<br>
+                    • 실제 컴퓨터와 분리된 임시 공간에서 실행 → 결과만 돌려줌<br>
+                    • 혜오니봇 기준: OpenClaw가 허용한 경로(iCloud 폴더 등)는 접근 가능
+                </div>
+            </details>
+        </div>
 
-        <details class="tech-term">
-            <summary>🔄 Homebrew vs npm 차이점</summary>
-            <div class="tech-content">
-                <span class="tag tag-install">🛒 설치 도구</span>
-                <div class="term-summary">Homebrew = 이마트(뭐든지), npm = 하이마트(JS 전용)</div>
-                <div class="term-section">🍎 비유</div>
-                Homebrew는 이마트/코스트코처럼 모든 종류 맥용 프로그램 설치. npm은 하이마트처럼 JavaScript 전용 프로그램만<br><br>
-                <div class="term-section">🔧 설명</div>
-                • Node.js 설치 → <code>brew install node</code> (이마트에서)<br>
-                • OpenClaw 설치 → <code>npm install openclaw</code> (하이마트에서)<br>
-                • Homebrew로 기본 도구 설치 후, npm으로 JS 프로그램 설치!
-            </div>
-        </details>
+        <!-- 🗣️ 소통 방식 -->
+        <div class="cat-section">
+            <div class="cat-header cat-header-comm">🗣️ 소통 방식</div>
+            <div class="cat-desc">사람과 컴퓨터, 앱과 서버가 대화하는 방법</div>
+
+            <details class="tech-term">
+                <summary>🖥️ CLI (Command Line Interface)</summary>
+                <div class="tech-content">
+                    <div class="term-summary">마우스 없이 글자로만 컴퓨터에 명령하는 방식</div>
+                    <div class="term-section">🍎 비유</div>
+                    일반 방식은 폴더 열 때 마우스로 더블클릭. CLI는 <code>cd 폴더명</code> 이라고 타이핑<br><br>
+                    <div class="term-section">🔧 설명</div>
+                    맥에서는 터미널 앱 = CLI를 쓸 수 있게 해주는 앱. 그래픽 없이 텍스트로만 컴퓨터랑 대화하는 것
+                </div>
+            </details>
+
+            <details class="tech-term">
+                <summary>📡 API (Application Programming Interface)</summary>
+                <div class="tech-content">
+                    <div class="term-summary">앱과 서버 사이의 중간 전달자 (식당 웨이터)</div>
+                    <div class="term-section">🍎 비유</div>
+                    손님(앱) → 웨이터(API) → 주방(서버). 손님은 주방에 직접 못 들어가고 웨이터를 통해서만 주문 가능<br><br>
+                    <div class="term-section">🔧 설명</div>
+                    • 날씨 앱 → 기상청 API → 날씨 정보 받아옴<br>
+                    • 혜오니봇 → Claude API → AI 응답 받아옴
+                </div>
+            </details>
+        </div>
+
+        <!-- 🔐 보안·인증 -->
+        <div class="cat-section">
+            <div class="cat-header cat-header-sec">🔐 보안·인증</div>
+            <div class="cat-desc">신원을 확인하고 접근을 허가하는 방법</div>
+
+            <details class="tech-term">
+                <summary>🔑 토큰 (Token)</summary>
+                <div class="tech-content">
+                    <div class="term-summary">호텔 키카드처럼 '나 진짜 사용자야!'를 증명하는 것</div>
+                    <div class="term-section">🍎 비유</div>
+                    호텔에서 체크인하면 키카드 받듯, 웹서비스에 로그인하면 토큰을 받음<br><br>
+                    <div class="term-section">🔧 설명</div>
+                    • <strong>API 토큰</strong> = "나 진짜 사용자 맞아!" 증명서<br>
+                    • <strong>OAuth 토큰</strong> = 다른 앱이 내 계정 대신 사용할 수 있게 해주는 허가증<br>
+                    • <strong>Bot 토큰</strong> = 봇이 메신저에서 활동할 수 있게 해주는 신분증
+                </div>
+            </details>
+        </div>
+
+        <!-- ⚙️ 명령·제어 -->
+        <div class="cat-section">
+            <div class="cat-header cat-header-cmd">⚙️ 명령·제어</div>
+            <div class="cat-desc">AI나 봇이 직접 명령을 실행하고 제어하는 방식</div>
+
+            <details class="tech-term">
+                <summary>⚙️ exec (Execute)</summary>
+                <div class="tech-content">
+                    <div class="term-summary">혜오니봇이 터미널에 명령어를 실행하는 도구</div>
+                    <div class="term-section">🍎 비유</div>
+                    CLI로 하는 작업들(파일 목록 보기, 파일 수정, 프로그램 설치 등)을 봇이 대신 해주는 것<br><br>
+                    <div class="term-section">🔧 설명</div>
+                    • <code>ask: always</code> → 명령어 실행 전 항상 혜오니 승인 필요<br>
+                    • <code>security: allowlist</code> → 허용된 것만 실행 가능<br>
+                    • <code>askFallback: deny</code> → 승인 UI 없으면 자동 차단
+                </div>
+            </details>
+        </div>
 
     </div>
 
@@ -462,14 +502,6 @@
     <div id="tip"></div>
 
     <script>
-        // 검색
-        document.getElementById('searchBox').addEventListener('input', function(e) {
-            const q = e.target.value.toLowerCase();
-            document.querySelectorAll('.memo-item, .tech-term').forEach(el => {
-                el.style.display = (!q || el.textContent.toLowerCase().includes(q)) ? '' : 'none';
-            });
-        });
-
         // 툴팁
         const tip = document.getElementById('tip');
 
